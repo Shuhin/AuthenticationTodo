@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  client:
+    container_name: reactclient
+    build: ./client/
+    restart: always
+    ports:
+      -'80:3000'
+    links:
+      - app
+  app:
+    container_name: docker-node-mongo-authentication
+    restart: always
+    build: .
+    ports:
+      - '80:5000'
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
